@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editors Gallery - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #121212;
+      color: #fff;
+      min-height: 100vh;
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Main Content Container */
+    .main-content {
+      flex: 1;
+      padding: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .msg {
+      text-align: center;
+      background: rgba(30,30,30,0.95);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+      font-size: 1.05rem;
+      color: #667eea;
+      max-width: 90vw;
+      margin: 0 auto;
+      word-break: break-all;
+      font-weight: 700;
+      box-shadow: 0 4px 18px rgba(102,126,234,0.15);
+      display: none;
+    }
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(30,30,30,0.98);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(102,126,234,0.2);
+      padding: 0.8rem 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      transition: 0.3s;
+      position: relative;
+      text-decoration: none;
+      color: #888;
+    }
+    .nav-item:hover {
+      background: rgba(102,126,234,0.09);
+    }
+    .nav-item.active {
+      color: #667eea;
+    }
+    .nav-item.active .nav-icon {
+      transform: scale(1.13);
+    }
+    .nav-icon {
+      font-size: 1.4rem;
+      transition: 0.3s;
+    }
+    .nav-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    @media (max-width: 480px) {
+      .main-content {padding: 1rem;}
+      .nav-label {font-size: 0.65rem;}
+      .nav-icon {font-size: 1.15rem;}
+    }
+  </style>
+</head>
+<body>
+  <div class="main-content" id="home-section"></div>
+  <div class="msg" id="msg-box"></div>
+  <!-- Bottom Navigation Footer -->
+  <div class="bottom-nav">
+    <div class="nav-item active" data-page="home">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+    </div>
+    <div class="nav-item" data-page="dashboard">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">Dashboard</div>
+    </div>
+    <div class="nav-item" data-page="projects">
+      <div class="nav-icon">🔍</div>
+      <div class="nav-label">Projects</div>
+    </div>
+    <div class="nav-item" data-page="wallet">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Wallet</div>
+    </div>
+    <div class="nav-item" data-page="profile">
+      <div class="nav-icon">👤</div>
+      <div class="nav-label">Profile</div>
+    </div>
+  </div>
+  <script>
+    // Navigation logic
+    const mainContent = document.getElementById('home-section');
+    const msgBox = document.getElementById('msg-box');
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        const page = this.getAttribute('data-page');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (page === 'home') {
+          msgBox.style.display = 'none';
+          mainContent.style.display = 'flex';
+        } else {
+          mainContent.style.display = 'none';
+          msgBox.textContent = "dashboard/project page will be updated soon . (Heyy_LetsCodee)";
+          msgBox.style.display = 'block';
+        }
+      });
+    });
+    // Home is default
+    msgBox.style.display = 'none';
+    mainContent.style.display = 'flex';
+  </script>
+</body>
+</html>

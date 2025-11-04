@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Home - Editors Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+    }
+
+    /* Loading screen */
+    #loading-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #0f0f0f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 999;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    #loading-screen.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255,255,255,0.1);
+      border-top: 5px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #loading-text {
+      font-weight: 600;
+      color: #667eea;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+
+    header {
+      width: 100%;
+      padding: 1.2rem 1.5rem;
+      background: rgba(20, 20, 20, 0.9);
+      border-bottom: 1px solid rgba(102,126,234,0.2);
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .user-card {
+      width: 90%;
+      max-width: 400px;
+      background: rgba(30, 30, 30, 0.95);
+      border: 1px solid rgba(102,126,234,0.2);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+    }
+
+    .user-card h2 {
+      color: #667eea;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .user-info p {
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .user-info strong { color: #667eea; }
+
+    .logout-btn {
+      display: block;
+      background: rgba(255, 70, 70, 0.9);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      margin: 1.5rem auto 0;
+      width: fit-content;
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 70, 70, 1);
+      box-shadow: 0 0 10px rgba(255, 70, 70, 0.5);
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(20,20,20,0.98);
+      border-top: 1px solid rgba(102,126,234,0.25);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0.6rem 0;
+      z-index: 200;
+      box-shadow: 0 -3px 15px rgba(0,0,0,0.4);
+    }
+
+    .nav-item {
+      text-align: center;
+      color: #aaa;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .nav-item.active {
+      color: #667eea;
+      transform: scale(1.1);
+    }
+
+    .nav-icon {
+      font-size: 1.4rem;
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.1rem; }
+      .user-card h2 { font-size: 1rem; }
+      .user-info p { font-size: 0.85rem; }
+      .logout-btn { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading screen -->
+  <div id="loading-screen">
+    <div class="spinner"></div>
+    <div id="loading-text">Editors Gallery</div>
+  </div>
+
+  <header>
+    <h1>Welcome, {{ name }} 👋</h1>
+  </header>
+
+  <main>
+    <div class="user-card">
+      <h2>Your Account</h2>
+      <div class="user-info">
+        <p><strong>Email:</strong> {{ email }}</p>
+        <p><strong>Role:</strong> {{ role }}</p>
+      </div>
+
+      <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+  </main>
+
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="window.location.href='{{ url_for('home') }}'">
+      <span class="nav-icon">🏠</span>
+      Home
+    </div>
+    <div class="nav-item" onclick="alert('Dashboard coming soon!')">
+      <span class="nav-icon">📊</span>
+      Dashboard
+    </div>
+    <div class="nav-item" onclick="alert('Projects coming soon!')">
+      <span class="nav-icon">🔍</span>
+      Projects
+    </div>
+    <div class="nav-item" onclick="alert('Wallet coming soon!')">
+      <span class="nav-icon">💰</span>
+      Wallet
+    </div>
+    <div class="nav-item" onclick="alert('Profile coming soon!')">
+      <span class="nav-icon">👤</span>
+      Profile
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener("load", () => {
+      const loadingScreen = document.getElementById("loading-screen");
+      setTimeout(() => {
+        loadingScreen.classList.add("fade-out");
+      }, 1200);
+    });
+  </script>
+</body>
+</html>

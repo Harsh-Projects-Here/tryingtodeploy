@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Editors Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(30, 30, 30, 0.9);
+      border: 1px solid rgba(102, 126, 234, 0.2);
+      border-radius: 15px;
+      padding: 3rem 2rem;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(102, 126, 234, 0.15);
+    }
+
+    h1 {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+      text-align: left;
+    }
+
+    label {
+      font-weight: 500;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: none;
+      margin-top: 0.5rem;
+      background: #1f1f1f;
+      color: #fff;
+      outline: none;
+    }
+
+    input:focus {
+      border: 1px solid #667eea;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+    }
+
+    .error {
+      color: #ff4c4c;
+      font-size: 0.9rem;
+      margin-top: 0.8rem;
+    }
+
+    p {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome Back</h1>
+    <form action="/login" method="POST">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required />
+      </div>
+      <div class="form-group">
+        <label>4-digit PIN</label>
+        <input type="password" name="pin" maxlength="4" placeholder="Enter your PIN" required />
+      </div>
+      <button type="submit" class="btn">Login</button>
+      
+      {% if error %}
+      <div class="error">{{ error }}</div>
+      {% endif %}
+    </form>
+    <p>Don't have an account? <a href="/register">Register now</a></p>
+  </div>
+</body>
+</html>

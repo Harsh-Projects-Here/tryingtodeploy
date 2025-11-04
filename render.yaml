@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: editors-gallery
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: FLASK_SECRET
+        value: "change_this_in_production"
